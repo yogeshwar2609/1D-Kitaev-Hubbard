@@ -53,11 +53,11 @@ if __name__=='__main__':
     #tbatasks(parameters,S4('1P-1O',nneighbour),job='APP')
     #for m in [20,40,60]:
     #    tbatasks(parameters,S4('%sO-1O'%m,nneighbour),job='APP')
-    tbatasks(parameters,S4('%sO-1O'%m,nneighbour),job='GSE')
+    #tbatasks(parameters,S4('%sO-1O'%m,nneighbour),job='GSE')
 
     # ed tasks
     #edtasks(parameters,FBasis((8*m,4*m)),S4('%sP-1O'%m,nneighbour),job='APP')
-    edtasks(parameters,FBasis((8*m,4*m)),S4('%sO-1O'%m,nneighbour),job='GSE')
+    #edtasks(parameters,FBasis((8*m,4*m)),S4('%sO-1O'%m,nneighbour),job='GSE')
 
     # dmrg
-    dmrgconstruct(parameters,S4.cylinder(0,'1O-1O',nneighbour),[t1,t2,U],[PQN(8*(i+1)) for i in xrange(m/2)],core='idmrg')
+    #dmrgconstruct(parameters,S4.cylinder(0,'1O-1O',nneighbour),[t1,t2,U],[PQN(8*(i+1)) for i in xrange(m/2)],core='idmrg')
