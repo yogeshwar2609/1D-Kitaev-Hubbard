@@ -46,19 +46,18 @@ if __name__=='__main__':
     #mpirn(f,parameters,bcast=True)
 
     # parameters
+    m=2
     parameters=[0.0,1.0,0.0]
 
     # tba tasks
     #tbatasks(parameters,S4('1P-1O',nneighbour),job='APP')
     #for m in [20,40,60]:
     #    tbatasks(parameters,S4('%sO-1O'%m,nneighbour),job='APP')
-    #tbatasks(parameters,S4('2O-1O',nneighbour),job='GSE')
+    tbatasks(parameters,S4('%sO-1O'%m,nneighbour),job='GSE')
 
     # ed tasks
-    m=2
     #edtasks(parameters,FBasis((8*m,4*m)),S4('%sP-1O'%m,nneighbour),job='APP')
-    #edtasks(parameters,FBasis((8*m,4*m)),S4('%sO-1O'%m,nneighbour),job='GSE')
+    edtasks(parameters,FBasis((8*m,4*m)),S4('%sO-1O'%m,nneighbour),job='GSE')
 
     # dmrg
-    m=2
-    #dmrgconstruct(parameters,S4.cylinder(0,'1O-1O',nneighbour),[t1,t2,U],[PQN(8*(i+1)) for i in xrange(m/2)],core='idmrg')
+    dmrgconstruct(parameters,S4.cylinder(0,'1O-1O',nneighbour),[t1,t2,U],[PQN(8*(i+1)) for i in xrange(m/2)],core='idmrg')
