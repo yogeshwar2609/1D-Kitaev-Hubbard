@@ -23,10 +23,10 @@ def kitaev_hopping(bond):
         return sigmaz('sp')
 
 # terms
-t1=lambda value: Hopping('t1',value)
-t2=lambda value: Hopping('t2',value,indexpacks=kitaev_hopping)
-U=lambda value: Hubbard('U',value)
-Um=lambda value: Hubbard('U',value,modulate=True)
+t1=lambda *parameters: Hopping('t1',parameters[0])
+t2=lambda *parameters: Hopping('t2',parameters[1],indexpacks=kitaev_hopping)
+U=lambda *parameters: Hubbard('U',parameters[2])
+Um=lambda *parameters: Hubbard('U',parameters[2],modulate=True)
 
 # cluster
 S4=Square('S1').tiling((2,2))
