@@ -39,13 +39,13 @@ if __name__=='__main__':
     parameters=[0.0,1.0,0.0]
 
     # tba tasks
-    #tbatasks(parameters,S4('1P-1O',nneighbour),job='APP')
+    #tbatasks(parameters,S4('1P-1O',nneighbour),job='EB')
     #for m in [20,40,60]:
-    #    tbatasks(parameters,S4('%sO-1O'%m,nneighbour),job='APP')
+    #    tbatasks(parameters,S4('%sO-1O'%m,nneighbour),job='EB')
     #tbatasks(parameters,S4('%sO-1O'%m,nneighbour),job='GSE')
 
     # ed tasks
-    #edtasks(parameters,FBasis((8*m,4*m)),S4('%sP-1O'%m,nneighbour),job='APP')
+    #edtasks(parameters,FBasis((8*m,4*m)),S4('%sP-1O'%m,nneighbour),job='EL')
     #edtasks(parameters,FBasis((8*m,4*m)),S4('%sO-1O'%m,nneighbour),job='GSE')
 
     # dmrg
