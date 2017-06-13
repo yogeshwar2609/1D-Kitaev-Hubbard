@@ -5,36 +5,25 @@ import numpy as np
 import mkl
 
 # tbatasks
-def tbatasks(parameters,lattice,job='APP'):
+def tbatasks(parameters,lattice,job='EB'):
     import HamiltonianPy.FreeSystem as TBA
     tba=tbaconstruct(parameters,lattice,[t1,t2])
-    if job=='APP':
+    if job=='EB':
         if len(lattice.vectors)==1:
-            eb=EB(name='EB',path=KSpace(reciprocals=lattice.reciprocals,segments=[(-0.5,0.5)],end=True,nk=401),run=TBA.TBAEB)
+            tba.register(EB(name='EB',path=KSpace(reciprocals=lattice.reciprocals,segments=[(-0.5,0.5)],end=True,nk=401),run=TBA.TBAEB))
         elif len(lattice.vectors)==0:
-            eb=EB(name='EB',run=TBA.TBAEB)
-        tba.register(eb)
-        tba.summary()
-    elif job=='GSE':
-        kspace=KSpace(reciprocals=lattice.reciprocals,nk=200) if len(lattice.vectors)>0 else None
-        GSE=tba.gse(filling=0.5,kspace=kspace)
-        tba.log.open()
-        tba.log<<Info.from_ordereddict({'Total':GSE,'Site':GSE/len(lattice)/(1 if kspace is None else kspace.rank('k'))})<<'\n'
-        tba.log.close()
+            tba.register(EB(name='EB',run=TBA.TBAEB))
+    if job=='GSE':
+        tba.register(TBA.GSE(name='GSE',filling=0.5,kspace=KSpace(reciprocals=lattice.reciprocals,nk=200) if len(lattice.vectors)>0 else None,run=TBA.TBAGSE))
+    tba.summary()
 
 # edtasks
-def edtasks(parameters,basis,lattice,job='APP'):
+def edtasks(parameters,basis,lattice,job='EL'):
     import HamiltonianPy.ED as ED
     ed=edconstruct(parameters,basis,lattice,[t1,t2,Um])
-    if job=='APP':
-        el=ED.EL(name='EL',path=BaseSpace(['U',np.linspace(0,40.0,401)]),ns=1,nder=2,run=ED.EDEL)
-        ed.register(el)
-        ed.summary()
-    elif job=='GSE':
-        GSE=ed.eig(k=1)[0]
-        ed.log.open()
-        ed.log<<Info.from_ordereddict({'Total':GSE,'Site':GSE/len(lattice)})<<'\n'
-        ed.log.close()
+    if job=='EL': ed.register(ED.EL(name='EL',path=BaseSpace(['U',np.linspace(0,40.0,401)]),ns=1,nder=2,run=ED.EDEL))
+    if job=='GSE': ed.register(GSE(name='GSE',run=ED.EDGSE))
+    ed.summary()
 
 if __name__=='__main__':
     mkl.set_num_threads(1)
